@@ -37,7 +37,7 @@
                     <td>{{ $ag->nome }}</td>
                     <td>{{ $ag->email }}</td>
                     <td>{{ \Carbon\Carbon::parse($ag->data)->format('d/m/Y') }}</td>
-                    <td>{{ \Carbon\Carbon::parse($ag->hora)->format('H:i') }}</td>
+                    <td><i class="fas fa-clock text-success"></i> {{ \Carbon\Carbon::parse($ag->hora)->format('H\hi') }}</td>
                     <td>
                         <a href="{{ route('agendamentos.edit', $ag->id) }}" class="btn btn-warning btn-sm">Editar</a>
 

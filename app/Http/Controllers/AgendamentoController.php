@@ -13,8 +13,8 @@ class AgendamentoController extends Controller
      */
     public function index()
     {
-         $agendamentos = Agendamento::all();
-    return view('agendamentos.index', compact('agendamentos'));
+        $agendamentos = Agendamento::all();
+        return view('agendamentos.index', compact('agendamentos'));
     }
 
     /**
@@ -22,26 +22,27 @@ class AgendamentoController extends Controller
      */
     public function create()
     {
-         return view('agendamentos.create');
+        return view('agendamentos.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-   public function store(Request $request)
-{
-    $validated = $request->validate([
-        'nome'     => 'required|string|max:255',
-        'email'    => 'required|email',
-        'data'     => 'required|date',
-        'hora'     => 'required',
-        'mensagem' => 'nullable|string',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'data' => 'required|date',
+            'hora' => 'required',
+            'mensagem' => 'nullable|string',
+        ]);
 
-    Agendamento::create($validated);
+        Agendamento::create($request->all());
 
-    return redirect()->route('agendamentos.index')->with('success', 'Agendamento realizado com sucesso!');
-}
+        return redirect()->route('agendamentos.index')
+            ->with('success', 'Agendamento criado com sucesso!');
+    }
 
     /**
      * Display the specified resource.
@@ -56,7 +57,7 @@ class AgendamentoController extends Controller
      */
     public function edit(Agendamento $agendamento)
     {
-        //
+        return view('agendamentos.edit', compact('agendamento'));
     }
 
     /**

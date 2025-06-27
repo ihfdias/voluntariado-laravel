@@ -28,7 +28,7 @@ class AgendamentoController extends Controller
             'hora' => 'required',
         ]);
 
-        
+
         $existe = Agendamento::where('data', $request->data)
             ->where('hora', $request->hora)
             ->exists();
@@ -42,19 +42,19 @@ class AgendamentoController extends Controller
         return redirect()->route('agendamentos.index')->with('success', 'Agendamento criado com sucesso!');
     }
 
-    public function edit($id)
-    {
-        $agendamento = Agendamento::findOrFail($id);
-        return view('agendamentos.edit', compact('agendamento'));
-    }
+    public function edit(Agendamento $agendamento)
+{
+    return view('agendamentos.edit', compact('agendamento'));
+}
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nome' => 'required',
-            'email' => 'required|email',
+            'nome' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
             'data' => 'required|date',
             'hora' => 'required',
+            'mensagem' => 'nullable|string',
         ]);
 
         $existe = Agendamento::where('data', $request->data)
@@ -69,7 +69,7 @@ class AgendamentoController extends Controller
         $agendamento = Agendamento::findOrFail($id);
         $agendamento->update($request->all());
 
-        return redirect()->route('agendamentos.index')->with('success', 'Agendamento atualizado com sucesso!');
+         return redirect()->route('agendamentos.index')->with('success', 'Agendamento atualizado com sucesso!');
     }
 
     public function destroy($id)
