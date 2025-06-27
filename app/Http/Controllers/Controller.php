@@ -42,12 +42,13 @@ class AgendamentoController extends Controller
         return redirect()->route('agendamentos.index')->with('success', 'Agendamento criado com sucesso!');
     }
 
-    public function edit(Agendamento $agendamento)
+   public function edit(Agendamento $agendamento)
 {
     return view('agendamentos.edit', compact('agendamento'));
 }
 
     public function update(Request $request, $id)
+
     {
         $request->validate([
             'nome' => 'required|string|max:255',

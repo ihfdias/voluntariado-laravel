@@ -15,7 +15,8 @@
         </div>
     @endif
 
-    <form action="{{route('agendamentos.update', $agendamento) }}" method="POST">
+    <form action="{{ route('agendamentos.update', $agendamento->id) }}" method="POST">
+
         @csrf
         @method('PUT')
 
