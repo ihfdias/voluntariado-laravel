@@ -44,35 +44,35 @@ class AgendamentoController extends Controller
             ->with('success', 'Agendamento criado com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Agendamento $agendamento)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Agendamento $agendamento)
     {
         return view('agendamentos.edit', compact('agendamento'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Agendamento $agendamento)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Agendamento $agendamento)
     {
         //
+    }
+
+    public function concluir($id)
+    {
+        $agendamento = Agendamento::findOrFail($id);
+        $agendamento->concluido = true;
+        $agendamento->save();
+
+        return redirect()->route('agendamentos.index')->with('success', 'Agendamento marcado como concluído!');
     }
 }

@@ -46,6 +46,16 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Deseja excluir?')">Excluir</button>
                         </form>
+
+                        @if (!$ag->concluido)
+                        <form action="{{ route('agendamentos.concluir', $ag->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn btn-success btn-sm">Concluir</button>
+                        </form>
+                        @else
+                        <span class="badge bg-secondary">Concluído</span>
+                        @endif
                     </td>
                 </tr>
                 @empty
