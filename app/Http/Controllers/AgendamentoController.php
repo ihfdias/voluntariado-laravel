@@ -22,16 +22,26 @@ class AgendamentoController extends Controller
      */
     public function create()
     {
-        //
+         return view('agendamentos.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+   public function store(Request $request)
+{
+    $validated = $request->validate([
+        'nome'     => 'required|string|max:255',
+        'email'    => 'required|email',
+        'data'     => 'required|date',
+        'hora'     => 'required',
+        'mensagem' => 'nullable|string',
+    ]);
+
+    Agendamento::create($validated);
+
+    return redirect()->route('agendamentos.index')->with('success', 'Agendamento realizado com sucesso!');
+}
 
     /**
      * Display the specified resource.
